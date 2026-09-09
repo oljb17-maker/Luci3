@@ -4,6 +4,7 @@
 
 body {
   margin: 0;
+
   font-family:
     -apple-system,
     BlinkMacSystemFont,
@@ -22,7 +23,9 @@ body {
 }
 
 
-/* HEADER */
+/* =========================
+   HEADER
+========================= */
 
 .bank-header {
   display: flex;
@@ -74,7 +77,9 @@ body {
 }
 
 
-/* CARDS */
+/* =========================
+   CARDS
+========================= */
 
 .card {
   background: #151b22;
@@ -94,7 +99,9 @@ body {
 }
 
 
-/* BALANCE */
+/* =========================
+   BALANCE
+========================= */
 
 .balance {
   display: flex;
@@ -118,7 +125,9 @@ body {
 }
 
 
-/* PROGRESS */
+/* =========================
+   PROGRESS
+========================= */
 
 .progress-bar {
   height: 12px;
@@ -154,7 +163,9 @@ body {
 }
 
 
-/* LOAN DATA */
+/* =========================
+   LOAN DATA
+========================= */
 
 .loan-data {
   display: grid;
@@ -192,7 +203,9 @@ body {
 }
 
 
-/* FIELDS */
+/* =========================
+   FIELDS
+========================= */
 
 .field {
   display: block;
@@ -244,7 +257,9 @@ input[type="number"] {
 }
 
 
-/* QUICK BUTTONS */
+/* =========================
+   QUICK BUTTONS
+========================= */
 
 .quick-buttons {
   display: grid;
@@ -278,7 +293,9 @@ input[type="number"] {
 }
 
 
-/* MODES */
+/* =========================
+   MODES
+========================= */
 
 .simulation-modes {
   display: grid;
@@ -321,7 +338,9 @@ input[type="number"] {
 }
 
 
-/* BUTTONS */
+/* =========================
+   BUTTONS
+========================= */
 
 button {
   font: inherit;
@@ -379,7 +398,9 @@ button {
 }
 
 
-/* RESULTS */
+/* =========================
+   RESULTS
+========================= */
 
 .result-highlight {
   text-align: center;
@@ -466,7 +487,9 @@ button {
 }
 
 
-/* RECEIPT */
+/* =========================
+   RECEIPT
+========================= */
 
 .receipt {
   display: none;
@@ -520,7 +543,9 @@ button {
 }
 
 
-/* MOBILE */
+/* =========================
+   MOBILE
+========================= */
 
 @media (max-width: 500px) {
 
@@ -559,7 +584,9 @@ button {
 }
 
 
-/* PRINT MODE */
+/* =========================
+   PRINT MODE
+========================= */
 
 @media print {
 
