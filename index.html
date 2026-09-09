@@ -9,22 +9,56 @@
   <link rel="stylesheet" href="style.css">
 </head>
 
-<body>
+<body class="theme-dark">
 
   <main class="app">
 
     <!-- =========================
-         ENCABEZADO
+         HEADER
     ========================== -->
 
     <header class="bank-header">
 
-      <div class="bank-symbol">K</div>
+      <div class="bank-brand">
 
-      <div>
-        <h1>KAIROS BANK</h1>
-        <p>Banco de Hierro de Bravo</p>
-        <small>Filial del Ciego de Clock Town, en Términa</small>
+        <div class="bank-symbol">
+          K
+        </div>
+
+        <div>
+          <h1>KAIROS BANK</h1>
+
+          <p>
+            Banco de Hierro de Bravo
+          </p>
+
+          <small>
+            Filial del Ciego de Clock Town,
+            en Términa
+          </small>
+        </div>
+
+      </div>
+
+
+      <div class="theme-switcher">
+
+        <button
+          id="darkThemeButton"
+          class="theme-button active"
+          type="button"
+        >
+          Oscuro
+        </button>
+
+        <button
+          id="lightThemeButton"
+          class="theme-button"
+          type="button"
+        >
+          Claro
+        </button>
+
       </div>
 
     </header>
@@ -40,7 +74,9 @@
 
       <div class="balance">
 
-        <span>Saldo actual</span>
+        <span>
+          Saldo actual
+        </span>
 
         <strong id="currentBalance">
           $37,924.48
@@ -52,19 +88,27 @@
       <div class="loan-progress">
 
         <div class="progress-bar">
-          <div class="progress-fill"></div>
+          <div
+            id="progressFill"
+            class="progress-fill"
+          ></div>
         </div>
+
 
         <div class="progress-info">
 
           <span>
             Pagados
-            <strong>29</strong>
+            <strong id="paymentsMadeDisplay">
+              29
+            </strong>
           </span>
 
           <span>
             Restantes
-            <strong>43</strong>
+            <strong id="paymentsRemainingDisplay">
+              43
+            </strong>
           </span>
 
         </div>
@@ -76,28 +120,38 @@
 
         <div>
           <span>APR</span>
-          <strong>12.90%</strong>
+          <strong id="aprDisplay">
+            12.90%
+          </strong>
         </div>
+
 
         <div>
           <span>Pago normal</span>
-          <strong>$1,189.78</strong>
+          <strong id="normalPaymentDisplay">
+            $1,189.78
+          </strong>
         </div>
+
 
         <div>
           <span>Plazo</span>
-          <strong>72 pagos</strong>
+          <strong id="totalPaymentsDisplay">
+            72 pagos
+          </strong>
         </div>
 
+
         <div>
-          <span>Vencimiento</span>
-          <strong>01/08/2030</strong>
+          <span>Modelo</span>
+          <strong>
+            Estimación mensual
+          </strong>
         </div>
 
       </div>
 
     </section>
-
 
 
     <!-- =========================
@@ -111,7 +165,9 @@
 
       <label class="field">
 
-        <span>Pagos realizados</span>
+        <span>
+          Pagos realizados
+        </span>
 
         <div class="payment-counter">
 
@@ -123,7 +179,9 @@
             max="72"
           >
 
-          <span>de 72</span>
+          <span>
+            de 72
+          </span>
 
         </div>
 
@@ -132,7 +190,9 @@
 
       <label class="field">
 
-        <span>¿Cuánto quieres pagar?</span>
+        <span>
+          ¿Cuánto quieres pagar?
+        </span>
 
         <div class="money-input">
 
@@ -142,6 +202,7 @@
             id="paymentAmount"
             type="number"
             value="1400"
+            min="0"
             step="0.01"
           >
 
@@ -152,27 +213,36 @@
 
       <div class="quick-buttons">
 
-        <button data-extra="50">
+        <button
+          type="button"
+          data-extra="50"
+        >
           + $50
         </button>
 
-        <button data-extra="100">
+        <button
+          type="button"
+          data-extra="100"
+        >
           + $100
         </button>
 
-        <button data-extra="200">
+        <button
+          type="button"
+          data-extra="200"
+        >
           + $200
         </button>
 
-        <button data-extra="500">
+        <button
+          type="button"
+          data-extra="500"
+        >
           + $500
         </button>
 
       </div>
 
-
-
-      <!-- MODOS -->
 
       <div class="simulation-modes">
 
@@ -187,7 +257,9 @@
 
           <div>
 
-            <strong>💣 Bombita</strong>
+            <strong>
+              💣 Bombita
+            </strong>
 
             <small>
               Extra solamente este mes
@@ -208,7 +280,9 @@
 
           <div>
 
-            <strong>🔥 Ataque mensual</strong>
+            <strong>
+              🔥 Ataque mensual
+            </strong>
 
             <small>
               Mantener este pago cada mes
@@ -229,7 +303,9 @@
 
           <div>
 
-            <strong>🎯 Eliminar meses</strong>
+            <strong>
+              🎯 Eliminar meses
+            </strong>
 
             <small>
               Calcular cuánto necesitas pagar
@@ -245,12 +321,12 @@
       <button
         id="simulateButton"
         class="primary-button"
+        type="button"
       >
         SIMULAR
       </button>
 
     </section>
-
 
 
     <!-- =========================
@@ -267,7 +343,9 @@
 
       <div class="result-highlight">
 
-        <span>🔥 Tiempo eliminado</span>
+        <span>
+          🔥 Tiempo eliminado
+        </span>
 
         <strong id="monthsSaved">
           —
@@ -281,9 +359,11 @@
 
         <div class="result-item">
 
-          <span>Pago normal</span>
+          <span>
+            Pago normal
+          </span>
 
-          <strong>
+          <strong id="normalPaymentResult">
             $1,189.78
           </strong>
 
@@ -292,7 +372,9 @@
 
         <div class="result-item">
 
-          <span>Pago elegido</span>
+          <span>
+            Pago elegido
+          </span>
 
           <strong id="selectedPayment">
             $1,400.00
@@ -303,7 +385,9 @@
 
         <div class="result-item">
 
-          <span>💣 Bombita extra</span>
+          <span>
+            💣 Bombita extra
+          </span>
 
           <strong id="extraPayment">
             $210.22
@@ -314,7 +398,9 @@
 
         <div class="result-item">
 
-          <span>Capital estimado</span>
+          <span>
+            Capital estimado
+          </span>
 
           <strong id="principalPaid">
             —
@@ -325,7 +411,9 @@
 
         <div class="result-item">
 
-          <span>Interés estimado</span>
+          <span>
+            Interés estimado
+          </span>
 
           <strong id="interestPaid">
             —
@@ -336,7 +424,9 @@
 
         <div class="result-item">
 
-          <span>Nuevo saldo</span>
+          <span>
+            Nuevo saldo
+          </span>
 
           <strong id="newBalance">
             —
@@ -347,7 +437,9 @@
 
         <div class="result-item">
 
-          <span>💰 Interés evitado</span>
+          <span>
+            💰 Interés evitado
+          </span>
 
           <strong id="interestSaved">
             —
@@ -358,7 +450,9 @@
 
         <div class="result-item">
 
-          <span>🏁 Pagos restantes</span>
+          <span>
+            🏁 Pagos restantes
+          </span>
 
           <strong id="remainingPayments">
             —
@@ -366,13 +460,13 @@
 
         </div>
 
-
       </div>
 
 
       <div class="result-note">
 
-        Estimación de Kairos Bank basada en amortización mensual.
+        Estimación de Kairos Bank basada
+        en amortización mensual.
 
       </div>
 
@@ -382,6 +476,7 @@
         <button
           id="printButton"
           class="secondary-button"
+          type="button"
         >
           IMPRIMIR SIMULACIÓN
         </button>
@@ -390,14 +485,36 @@
         <button
           id="resetButton"
           class="ghost-button"
+          type="button"
         >
           LIMPIAR
         </button>
 
       </div>
 
-    </section>
 
+      <div class="legal-note">
+
+        <strong>
+          KAIROS BANK
+        </strong>
+
+        <p>
+          Simulador personal de préstamos.
+          Estimación basada en los datos
+          introducidos y en el modelo de
+          interés seleccionado.
+        </p>
+
+        <p>
+          NO AFILIADO A NINGUNA BANCA.
+          <br>
+          RESULTADOS ESTIMADOS.
+        </p>
+
+      </div>
+
+    </section>
 
 
     <!-- =========================
@@ -445,7 +562,9 @@
 
       <div class="receipt-row">
 
-        <span>SALDO ACTUAL</span>
+        <span>
+          SALDO ACTUAL
+        </span>
 
         <span id="receiptCurrentBalance">
           $37,924.48
@@ -456,9 +575,11 @@
 
       <div class="receipt-row">
 
-        <span>APR</span>
-
         <span>
+          APR
+        </span>
+
+        <span id="receiptApr">
           12.90%
         </span>
 
@@ -467,9 +588,11 @@
 
       <div class="receipt-row">
 
-        <span>PAGO NORMAL</span>
-
         <span>
+          PAGO NORMAL
+        </span>
+
+        <span id="receiptNormalPayment">
           $1,189.78
         </span>
 
@@ -478,7 +601,9 @@
 
       <div class="receipt-row">
 
-        <span>PAGO ACTUAL</span>
+        <span>
+          PAGO ACTUAL
+        </span>
 
         <span id="receiptPaymentNumber">
           29 / 72
@@ -492,7 +617,9 @@
 
       <div class="receipt-row">
 
-        <span>PAGO ELEGIDO</span>
+        <span>
+          PAGO ELEGIDO
+        </span>
 
         <span id="receiptSelectedPayment">
           $1,400.00
@@ -503,7 +630,9 @@
 
       <div class="receipt-row">
 
-        <span>BOMBITA</span>
+        <span>
+          BOMBITA
+        </span>
 
         <span id="receiptExtra">
           $210.22
@@ -517,7 +646,9 @@
 
       <div class="receipt-row">
 
-        <span>CAPITAL</span>
+        <span>
+          CAPITAL
+        </span>
 
         <span id="receiptPrincipal">
           —
@@ -528,7 +659,9 @@
 
       <div class="receipt-row">
 
-        <span>INTERÉS</span>
+        <span>
+          INTERÉS
+        </span>
 
         <span id="receiptInterest">
           —
@@ -539,7 +672,9 @@
 
       <div class="receipt-row">
 
-        <span>NUEVO SALDO</span>
+        <span>
+          NUEVO SALDO
+        </span>
 
         <span id="receiptNewBalance">
           —
@@ -550,7 +685,9 @@
 
       <div class="receipt-row">
 
-        <span>MESES ELIMINADOS</span>
+        <span>
+          MESES ELIMINADOS
+        </span>
 
         <span id="receiptMonthsSaved">
           —
@@ -561,7 +698,9 @@
 
       <div class="receipt-row">
 
-        <span>INTERÉS EVITADO</span>
+        <span>
+          INTERÉS EVITADO
+        </span>
 
         <span id="receiptInterestSaved">
           —
@@ -572,7 +711,9 @@
 
       <div class="receipt-row">
 
-        <span>PAGOS RESTANTES</span>
+        <span>
+          PAGOS RESTANTES
+        </span>
 
         <span id="receiptRemainingPayments">
           —
@@ -587,6 +728,7 @@
       <div class="receipt-center receipt-message">
 
         EL TIEMPO OPORTUNO
+        <br>
         TAMBIÉN SE CONSTRUYE.
 
       </div>
@@ -597,9 +739,21 @@
 
       <div class="receipt-center receipt-small">
 
-        SIMULACIÓN PERSONAL
+        KAIROS BANK
+        <br><br>
+
+        SIMULADOR PERSONAL DE PRÉSTAMOS
+        <br><br>
+
+        ESTIMACIÓN BASADA EN LOS DATOS
+        INTRODUCIDOS Y EN EL MODELO
+        DE INTERÉS SELECCIONADO
+        <br><br>
+
+        NO AFILIADO A NINGUNA BANCA
         <br>
-        NO CONSTITUYE INFORMACIÓN BANCARIA REAL
+
+        RESULTADOS ESTIMADOS
 
       </div>
 
