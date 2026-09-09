@@ -2,6 +2,92 @@
   box-sizing: border-box;
 }
 
+
+/* =========================
+   VARIABLES BASE
+========================= */
+
+:root {
+  --bg: #0c1015;
+
+  --card: #151b22;
+  --card-inner: #10151b;
+
+  --border: #252d36;
+  --border-soft: #323a45;
+
+  --text: #f5f7fa;
+  --muted: #8d949e;
+
+  --accent: #d6b45a;
+  --accent-text: #111111;
+
+  --input-bg: #0d1218;
+
+  --button-secondary: #252d36;
+
+  --progress-bg: #303740;
+}
+
+
+/* =========================
+   TEMA OSCURO
+========================= */
+
+body.theme-dark {
+  --bg: #0c1015;
+
+  --card: #151b22;
+  --card-inner: #10151b;
+
+  --border: #252d36;
+  --border-soft: #323a45;
+
+  --text: #f5f7fa;
+  --muted: #8d949e;
+
+  --accent: #d6b45a;
+  --accent-text: #111111;
+
+  --input-bg: #0d1218;
+
+  --button-secondary: #252d36;
+
+  --progress-bg: #303740;
+}
+
+
+/* =========================
+   TEMA CLARO
+========================= */
+
+body.theme-light {
+  --bg: #f3f4f6;
+
+  --card: #ffffff;
+  --card-inner: #f7f8fa;
+
+  --border: #d9dde3;
+  --border-soft: #c9ced6;
+
+  --text: #15181c;
+  --muted: #68707a;
+
+  --accent: #b8902f;
+  --accent-text: #ffffff;
+
+  --input-bg: #ffffff;
+
+  --button-secondary: #e9ebef;
+
+  --progress-bg: #d8dce2;
+}
+
+
+/* =========================
+   GENERAL
+========================= */
+
 body {
   margin: 0;
 
@@ -11,14 +97,20 @@ body {
     "Segoe UI",
     sans-serif;
 
-  background: #0c1015;
-  color: #f5f7fa;
+  background: var(--bg);
+  color: var(--text);
+
+  transition:
+    background 0.2s ease,
+    color 0.2s ease;
 }
 
 
 .app {
   width: min(100%, 720px);
+
   margin: auto;
+
   padding: 20px;
 }
 
@@ -29,8 +121,12 @@ body {
 
 .bank-header {
   display: flex;
+
+  justify-content: space-between;
+
   align-items: center;
-  gap: 14px;
+
+  gap: 16px;
 
   padding:
     25px
@@ -39,19 +135,35 @@ body {
 }
 
 
+.bank-brand {
+  display: flex;
+
+  align-items: center;
+
+  gap: 14px;
+
+  min-width: 0;
+}
+
+
 .bank-symbol {
+  flex-shrink: 0;
+
   width: 56px;
   height: 56px;
 
   display: grid;
+
   place-items: center;
 
   border-radius: 50%;
 
-  background: #d6b45a;
-  color: #111;
+  background: var(--accent);
+
+  color: var(--accent-text);
 
   font-size: 28px;
+
   font-weight: 900;
 }
 
@@ -68,12 +180,61 @@ body {
     4px
     0;
 
-  color: #d6b45a;
+  color: var(--accent);
 }
 
 
 .bank-header small {
-  color: #8d949e;
+  color: var(--muted);
+}
+
+
+/* =========================
+   THEME SWITCHER
+========================= */
+
+.theme-switcher {
+  display: flex;
+
+  gap: 6px;
+
+  flex-shrink: 0;
+}
+
+
+.theme-button {
+  border:
+    1px solid
+    var(--border);
+
+  background:
+    var(--card-inner);
+
+  color:
+    var(--text);
+
+  padding:
+    9px
+    11px;
+
+  border-radius:
+    10px;
+
+  cursor: pointer;
+
+  font-size: 12px;
+}
+
+
+.theme-button.active {
+  background:
+    var(--accent);
+
+  color:
+    var(--accent-text);
+
+  border-color:
+    var(--accent);
 }
 
 
@@ -82,20 +243,27 @@ body {
 ========================= */
 
 .card {
-  background: #151b22;
+  background:
+    var(--card);
 
-  border: 1px solid #252d36;
+  border:
+    1px solid
+    var(--border);
 
-  border-radius: 22px;
+  border-radius:
+    22px;
 
-  padding: 22px;
+  padding:
+    22px;
 
-  margin-bottom: 18px;
+  margin-bottom:
+    18px;
 }
 
 
 .card h2 {
-  margin-top: 0;
+  margin-top:
+    0;
 }
 
 
@@ -104,8 +272,11 @@ body {
 ========================= */
 
 .balance {
-  display: flex;
-  flex-direction: column;
+  display:
+    flex;
+
+  flex-direction:
+    column;
 
   margin:
     25px
@@ -114,14 +285,17 @@ body {
 
 
 .balance span {
-  color: #8d949e;
+  color:
+    var(--muted);
 }
 
 
 .balance strong {
-  font-size: 40px;
+  font-size:
+    40px;
 
-  margin-top: 4px;
+  margin-top:
+    4px;
 }
 
 
@@ -130,36 +304,54 @@ body {
 ========================= */
 
 .progress-bar {
-  height: 12px;
+  height:
+    12px;
 
-  background: #303740;
+  background:
+    var(--progress-bg);
 
-  border-radius: 20px;
+  border-radius:
+    20px;
 
-  overflow: hidden;
+  overflow:
+    hidden;
 }
 
 
 .progress-fill {
-  width: 40.28%;
-  height: 100%;
+  width:
+    40.28%;
 
-  background: #d6b45a;
+  height:
+    100%;
+
+  background:
+    var(--accent);
+
+  transition:
+    width
+    0.2s ease;
 }
 
 
 .progress-info {
-  display: flex;
-  justify-content: space-between;
+  display:
+    flex;
 
-  margin-top: 10px;
+  justify-content:
+    space-between;
 
-  color: #8d949e;
+  margin-top:
+    10px;
+
+  color:
+    var(--muted);
 }
 
 
 .progress-info strong {
-  color: white;
+  color:
+    var(--text);
 }
 
 
@@ -168,38 +360,50 @@ body {
 ========================= */
 
 .loan-data {
-  display: grid;
+  display:
+    grid;
 
   grid-template-columns:
     repeat(2, 1fr);
 
-  gap: 12px;
+  gap:
+    12px;
 
-  margin-top: 25px;
+  margin-top:
+    25px;
 }
 
 
 .loan-data div {
-  background: #10151b;
+  background:
+    var(--card-inner);
 
-  padding: 15px;
+  padding:
+    15px;
 
-  border-radius: 14px;
+  border-radius:
+    14px;
 
-  display: flex;
-  flex-direction: column;
+  display:
+    flex;
+
+  flex-direction:
+    column;
 }
 
 
 .loan-data span {
-  color: #8d949e;
+  color:
+    var(--muted);
 
-  font-size: 13px;
+  font-size:
+    13px;
 }
 
 
 .loan-data strong {
-  margin-top: 5px;
+  margin-top:
+    5px;
 }
 
 
@@ -208,52 +412,79 @@ body {
 ========================= */
 
 .field {
-  display: block;
+  display:
+    block;
 
-  margin-bottom: 20px;
+  margin-bottom:
+    20px;
 }
 
 
 .field > span {
-  display: block;
+  display:
+    block;
 
-  margin-bottom: 8px;
+  margin-bottom:
+    8px;
 
-  color: #a7adb5;
+  color:
+    var(--muted);
 }
 
 
 .payment-counter,
 .money-input {
-  display: flex;
-  align-items: center;
-  gap: 10px;
+  display:
+    flex;
+
+  align-items:
+    center;
+
+  gap:
+    10px;
 }
 
 
 input[type="number"] {
-  width: 100%;
+  width:
+    100%;
 
-  background: #0d1218;
+  background:
+    var(--input-bg);
 
-  color: white;
+  color:
+    var(--text);
 
-  border: 1px solid #323a45;
+  border:
+    1px solid
+    var(--border-soft);
 
-  border-radius: 14px;
+  border-radius:
+    14px;
 
-  padding: 16px;
+  padding:
+    16px;
 
-  font-size: 22px;
+  font-size:
+    22px;
 
-  outline: none;
+  outline:
+    none;
+}
+
+
+input[type="number"]:focus {
+  border-color:
+    var(--accent);
 }
 
 
 .money-input span {
-  font-size: 24px;
+  font-size:
+    24px;
 
-  color: #d6b45a;
+  color:
+    var(--accent);
 }
 
 
@@ -262,12 +493,14 @@ input[type="number"] {
 ========================= */
 
 .quick-buttons {
-  display: grid;
+  display:
+    grid;
 
   grid-template-columns:
     repeat(4, 1fr);
 
-  gap: 8px;
+  gap:
+    8px;
 
   margin:
     10px
@@ -277,19 +510,24 @@ input[type="number"] {
 
 
 .quick-buttons button {
-  background: #252d36;
+  background:
+    var(--button-secondary);
 
-  color: white;
+  color:
+    var(--text);
 
-  border: none;
+  border:
+    none;
 
   padding:
     12px
     5px;
 
-  border-radius: 12px;
+  border-radius:
+    12px;
 
-  cursor: pointer;
+  cursor:
+    pointer;
 }
 
 
@@ -298,8 +536,11 @@ input[type="number"] {
 ========================= */
 
 .simulation-modes {
-  display: grid;
-  gap: 10px;
+  display:
+    grid;
+
+  gap:
+    10px;
 
   margin:
     25px
@@ -308,33 +549,46 @@ input[type="number"] {
 
 
 .mode-option {
-  display: flex;
-  align-items: center;
+  display:
+    flex;
 
-  gap: 12px;
+  align-items:
+    center;
 
-  background: #10151b;
+  gap:
+    12px;
 
-  border: 1px solid #252d36;
+  background:
+    var(--card-inner);
 
-  padding: 15px;
+  border:
+    1px solid
+    var(--border);
 
-  border-radius: 15px;
+  padding:
+    15px;
 
-  cursor: pointer;
+  border-radius:
+    15px;
+
+  cursor:
+    pointer;
 }
 
 
 .mode-option strong,
 .mode-option small {
-  display: block;
+  display:
+    block;
 }
 
 
 .mode-option small {
-  margin-top: 3px;
+  margin-top:
+    3px;
 
-  color: #8d949e;
+  color:
+    var(--muted);
 }
 
 
@@ -343,58 +597,79 @@ input[type="number"] {
 ========================= */
 
 button {
-  font: inherit;
+  font:
+    inherit;
 }
 
 
 .primary-button {
-  width: 100%;
+  width:
+    100%;
 
-  border: none;
+  border:
+    none;
 
-  padding: 18px;
+  padding:
+    18px;
 
-  border-radius: 16px;
+  border-radius:
+    16px;
 
-  background: #d6b45a;
+  background:
+    var(--accent);
 
-  color: #111;
+  color:
+    var(--accent-text);
 
-  font-weight: 900;
+  font-weight:
+    900;
 
-  font-size: 16px;
+  font-size:
+    16px;
 
-  cursor: pointer;
+  cursor:
+    pointer;
 }
 
 
 .secondary-button,
 .ghost-button {
-  width: 100%;
+  width:
+    100%;
 
-  padding: 15px;
+  padding:
+    15px;
 
-  border-radius: 14px;
+  border-radius:
+    14px;
 
-  cursor: pointer;
+  cursor:
+    pointer;
 }
 
 
 .secondary-button {
-  background: #252d36;
+  background:
+    var(--button-secondary);
 
-  color: white;
+  color:
+    var(--text);
 
-  border: none;
+  border:
+    none;
 }
 
 
 .ghost-button {
-  background: transparent;
+  background:
+    transparent;
 
-  color: #8d949e;
+  color:
+    var(--muted);
 
-  border: 1px solid #323a45;
+  border:
+    1px solid
+    var(--border-soft);
 }
 
 
@@ -403,87 +678,167 @@ button {
 ========================= */
 
 .result-highlight {
-  text-align: center;
+  text-align:
+    center;
 
-  background: #10151b;
+  background:
+    var(--card-inner);
 
-  border-radius: 18px;
+  border-radius:
+    18px;
 
-  padding: 25px;
+  padding:
+    25px;
 
-  margin-bottom: 15px;
+  margin-bottom:
+    15px;
 }
 
 
 .result-highlight span {
-  display: block;
+  display:
+    block;
 
-  color: #8d949e;
+  color:
+    var(--muted);
 }
 
 
 .result-highlight strong {
-  display: block;
+  display:
+    block;
 
-  color: #d6b45a;
+  color:
+    var(--accent);
 
-  font-size: 38px;
+  font-size:
+    38px;
 
-  margin-top: 5px;
+  margin-top:
+    5px;
 }
 
 
 .results-grid {
-  display: grid;
+  display:
+    grid;
 
   grid-template-columns:
     repeat(2, 1fr);
 
-  gap: 10px;
+  gap:
+    10px;
 }
 
 
 .result-item {
-  background: #10151b;
+  background:
+    var(--card-inner);
 
-  padding: 14px;
+  padding:
+    14px;
 
-  border-radius: 13px;
+  border-radius:
+    13px;
 
-  display: flex;
-  flex-direction: column;
+  display:
+    flex;
+
+  flex-direction:
+    column;
 }
 
 
 .result-item span {
-  color: #8d949e;
+  color:
+    var(--muted);
 
-  font-size: 13px;
+  font-size:
+    13px;
 }
 
 
 .result-item strong {
-  margin-top: 5px;
+  margin-top:
+    5px;
 }
 
 
 .result-note {
-  text-align: center;
+  text-align:
+    center;
 
-  margin-top: 18px;
+  margin-top:
+    18px;
 
-  color: #8d949e;
+  color:
+    var(--muted);
 
-  font-size: 13px;
+  font-size:
+    13px;
 }
 
 
 .action-buttons {
-  display: grid;
+  display:
+    grid;
 
-  gap: 10px;
+  gap:
+    10px;
 
-  margin-top: 20px;
+  margin-top:
+    20px;
+}
+
+
+/* =========================
+   LEGAL NOTE
+========================= */
+
+.legal-note {
+  margin-top:
+    24px;
+
+  padding-top:
+    18px;
+
+  border-top:
+    1px solid
+    var(--border);
+
+  text-align:
+    center;
+
+  color:
+    var(--muted);
+
+  font-size:
+    12px;
+
+  line-height:
+    1.6;
+}
+
+
+.legal-note strong {
+  display:
+    block;
+
+  color:
+    var(--accent);
+
+  margin-bottom:
+    8px;
+
+  letter-spacing:
+    1px;
+}
+
+
+.legal-note p {
+  margin:
+    6px
+    0;
 }
 
 
@@ -492,23 +847,28 @@ button {
 ========================= */
 
 .receipt {
-  display: none;
+  display:
+    none;
 }
 
 
 .receipt-center {
-  text-align: center;
+  text-align:
+    center;
 }
 
 
 .receipt-center span,
 .receipt-center strong {
-  display: block;
+  display:
+    block;
 }
 
 
 .receipt-line {
-  border-top: 1px dashed #000;
+  border-top:
+    1px dashed
+    #000;
 
   margin:
     14px
@@ -517,11 +877,14 @@ button {
 
 
 .receipt-row {
-  display: flex;
+  display:
+    flex;
 
-  justify-content: space-between;
+  justify-content:
+    space-between;
 
-  gap: 20px;
+  gap:
+    20px;
 
   margin:
     7px
@@ -530,16 +893,20 @@ button {
 
 
 .receipt-message {
-  font-weight: bold;
+  font-weight:
+    bold;
 
-  line-height: 1.5;
+  line-height:
+    1.5;
 }
 
 
 .receipt-small {
-  font-size: 10px;
+  font-size:
+    10px;
 
-  line-height: 1.4;
+  line-height:
+    1.4;
 }
 
 
@@ -547,26 +914,51 @@ button {
    MOBILE
 ========================= */
 
-@media (max-width: 500px) {
+@media (max-width: 600px) {
 
   .app {
-    padding: 14px;
+    padding:
+      14px;
+  }
+
+
+  .bank-header {
+    flex-direction:
+      column;
+
+    align-items:
+      stretch;
+  }
+
+
+  .theme-switcher {
+    width:
+      100%;
+  }
+
+
+  .theme-button {
+    flex:
+      1;
   }
 
 
   .bank-header h1 {
-    font-size: 22px;
+    font-size:
+      22px;
   }
 
 
   .balance strong {
-    font-size: 35px;
+    font-size:
+      35px;
   }
 
 
   .loan-data {
     grid-template-columns:
-      1fr 1fr;
+      1fr
+      1fr;
   }
 
 
@@ -578,7 +970,19 @@ button {
 
   .results-grid {
     grid-template-columns:
-      1fr 1fr;
+      1fr
+      1fr;
+  }
+
+}
+
+
+@media (max-width: 380px) {
+
+  .loan-data,
+  .results-grid {
+    grid-template-columns:
+      1fr;
   }
 
 }
@@ -591,40 +995,51 @@ button {
 @media print {
 
   body {
-    background: white;
+    background:
+      white;
 
-    color: black;
+    color:
+      black;
   }
 
 
   .app > * {
-    display: none !important;
+    display:
+      none !important;
   }
 
 
   #receipt {
-    display: block !important;
+    display:
+      block !important;
 
-    width: 80mm;
+    width:
+      80mm;
 
-    margin: auto;
+    margin:
+      auto;
 
-    padding: 5mm;
+    padding:
+      5mm;
 
     font-family:
       "Courier New",
       monospace;
 
-    font-size: 12px;
+    font-size:
+      12px;
 
-    color: black;
+    color:
+      black;
 
-    background: white;
+    background:
+      white;
   }
 
 
   @page {
-    margin: 5mm;
+    margin:
+      5mm;
   }
 
 }
