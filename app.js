@@ -1,6 +1,6 @@
 /* =========================================
    KAIROS BANK
-   V0.2 - MOTOR FINANCIERO
+   MOTOR FINANCIERO
 ========================================= */
 
 
@@ -9,103 +9,254 @@
 ========================================= */
 
 const APR = 12.90;
-const MONTHLY_RATE = APR / 100 / 12;
 
-const NORMAL_PAYMENT = 1189.78;
-const TOTAL_PAYMENTS = 72;
+const MONTHLY_RATE =
+  APR / 100 / 12;
+
+const NORMAL_PAYMENT =
+  1189.78;
+
+const TOTAL_PAYMENTS =
+  72;
+
 
 /*
-  Capital original calibrado provisionalmente
-  para que el saldo estimado alrededor del
-  pago 29 coincida con el saldo conocido.
+  Capital original calibrado
+  provisionalmente.
 
-  Cuando tengamos el Amount Financed real,
-  este valor se reemplaza.
+  Más adelante podremos
+  reemplazar esto por datos
+  completamente editables.
 */
 
-const ORIGINAL_PRINCIPAL = 57321.54;
+const ORIGINAL_PRINCIPAL =
+  57321.54;
 
 
 /* =========================================
-   ELEMENTOS HTML
+   ELEMENTOS PRINCIPALES
 ========================================= */
 
 const paymentAmount =
-  document.getElementById("paymentAmount");
+  document.getElementById(
+    "paymentAmount"
+  );
 
 const paymentsMade =
-  document.getElementById("paymentsMade");
+  document.getElementById(
+    "paymentsMade"
+  );
 
 const currentBalance =
-  document.getElementById("currentBalance");
+  document.getElementById(
+    "currentBalance"
+  );
 
 const selectedPayment =
-  document.getElementById("selectedPayment");
+  document.getElementById(
+    "selectedPayment"
+  );
 
 const extraPayment =
-  document.getElementById("extraPayment");
+  document.getElementById(
+    "extraPayment"
+  );
 
 const principalPaid =
-  document.getElementById("principalPaid");
+  document.getElementById(
+    "principalPaid"
+  );
 
 const interestPaid =
-  document.getElementById("interestPaid");
+  document.getElementById(
+    "interestPaid"
+  );
 
 const newBalance =
-  document.getElementById("newBalance");
+  document.getElementById(
+    "newBalance"
+  );
 
 const interestSaved =
-  document.getElementById("interestSaved");
+  document.getElementById(
+    "interestSaved"
+  );
 
 const remainingPayments =
-  document.getElementById("remainingPayments");
+  document.getElementById(
+    "remainingPayments"
+  );
 
 const monthsSaved =
-  document.getElementById("monthsSaved");
+  document.getElementById(
+    "monthsSaved"
+  );
 
 const simulateButton =
-  document.getElementById("simulateButton");
+  document.getElementById(
+    "simulateButton"
+  );
 
 const printButton =
-  document.getElementById("printButton");
+  document.getElementById(
+    "printButton"
+  );
 
 const resetButton =
-  document.getElementById("resetButton");
+  document.getElementById(
+    "resetButton"
+  );
 
 
 /* =========================================
-   ELEMENTOS DEL RECIBO
+   PROGRESO
+========================================= */
+
+const progressFill =
+  document.getElementById(
+    "progressFill"
+  );
+
+const paymentsMadeDisplay =
+  document.getElementById(
+    "paymentsMadeDisplay"
+  );
+
+const paymentsRemainingDisplay =
+  document.getElementById(
+    "paymentsRemainingDisplay"
+  );
+
+
+/* =========================================
+   RECIBO
 ========================================= */
 
 const receiptCurrentBalance =
-  document.getElementById("receiptCurrentBalance");
+  document.getElementById(
+    "receiptCurrentBalance"
+  );
 
 const receiptSelectedPayment =
-  document.getElementById("receiptSelectedPayment");
+  document.getElementById(
+    "receiptSelectedPayment"
+  );
 
 const receiptExtra =
-  document.getElementById("receiptExtra");
+  document.getElementById(
+    "receiptExtra"
+  );
 
 const receiptPaymentNumber =
-  document.getElementById("receiptPaymentNumber");
+  document.getElementById(
+    "receiptPaymentNumber"
+  );
 
 const receiptPrincipal =
-  document.getElementById("receiptPrincipal");
+  document.getElementById(
+    "receiptPrincipal"
+  );
 
 const receiptInterest =
-  document.getElementById("receiptInterest");
+  document.getElementById(
+    "receiptInterest"
+  );
 
 const receiptNewBalance =
-  document.getElementById("receiptNewBalance");
+  document.getElementById(
+    "receiptNewBalance"
+  );
 
 const receiptMonthsSaved =
-  document.getElementById("receiptMonthsSaved");
+  document.getElementById(
+    "receiptMonthsSaved"
+  );
 
 const receiptInterestSaved =
-  document.getElementById("receiptInterestSaved");
+  document.getElementById(
+    "receiptInterestSaved"
+  );
 
 const receiptRemainingPayments =
-  document.getElementById("receiptRemainingPayments");
+  document.getElementById(
+    "receiptRemainingPayments"
+  );
+
+
+/* =========================================
+   THEMES
+========================================= */
+
+const darkThemeButton =
+  document.getElementById(
+    "darkThemeButton"
+  );
+
+const lightThemeButton =
+  document.getElementById(
+    "lightThemeButton"
+  );
+
+
+function setTheme(theme) {
+
+  document.body.classList.remove(
+    "theme-dark",
+    "theme-light"
+  );
+
+  darkThemeButton.classList.remove(
+    "active"
+  );
+
+  lightThemeButton.classList.remove(
+    "active"
+  );
+
+
+  if (theme === "light") {
+
+    document.body.classList.add(
+      "theme-light"
+    );
+
+    lightThemeButton.classList.add(
+      "active"
+    );
+
+  } else {
+
+    document.body.classList.add(
+      "theme-dark"
+    );
+
+    darkThemeButton.classList.add(
+      "active"
+    );
+
+  }
+
+}
+
+
+darkThemeButton.addEventListener(
+  "click",
+  () => {
+
+    setTheme("dark");
+
+  }
+);
+
+
+lightThemeButton.addEventListener(
+  "click",
+  () => {
+
+    setTheme("light");
+
+  }
+);
 
 
 /* =========================================
@@ -117,8 +268,11 @@ function currency(value) {
   return new Intl.NumberFormat(
     "en-US",
     {
-      style: "currency",
-      currency: "USD"
+      style:
+        "currency",
+
+      currency:
+        "USD"
     }
   ).format(value);
 
@@ -136,7 +290,9 @@ function calculateBalanceAfterPayments(
   numberOfPayments
 ) {
 
-  let balance = originalBalance;
+  let balance =
+    originalBalance;
+
 
   for (
     let i = 0;
@@ -147,16 +303,25 @@ function calculateBalanceAfterPayments(
     const interest =
       balance * rate;
 
+
     const principal =
       payment - interest;
 
-    balance -= principal;
 
-    if (balance <= 0) {
+    balance -=
+      principal;
+
+
+    if (
+      balance <= 0
+    ) {
+
       return 0;
+
     }
 
   }
+
 
   return balance;
 
@@ -164,7 +329,7 @@ function calculateBalanceAfterPayments(
 
 
 /* =========================================
-   SIMULAR PRÉSTAMO DESDE UN SALDO
+   SIMULADOR GENERAL
 ========================================= */
 
 function simulateLoan(
@@ -172,10 +337,15 @@ function simulateLoan(
   monthlyPayment
 ) {
 
-  let balance = startingBalance;
+  let balance =
+    startingBalance;
 
-  let months = 0;
-  let totalInterest = 0;
+  let months =
+    0;
+
+  let totalInterest =
+    0;
+
 
   while (
     balance > 0 &&
@@ -183,10 +353,13 @@ function simulateLoan(
   ) {
 
     const interest =
-      balance * MONTHLY_RATE;
+      balance *
+      MONTHLY_RATE;
+
 
     let payment =
       monthlyPayment;
+
 
     if (
       payment >
@@ -198,29 +371,47 @@ function simulateLoan(
 
     }
 
+
     const principal =
       payment - interest;
 
-    if (principal <= 0) {
+
+    if (
+      principal <= 0
+    ) {
 
       return {
-        months: Infinity,
-        interest: Infinity
+        months:
+          Infinity,
+
+        interest:
+          Infinity
       };
 
     }
 
-    balance -= principal;
 
-    totalInterest += interest;
+    balance -=
+      principal;
+
+
+    totalInterest +=
+      interest;
+
 
     months++;
 
   }
 
+
   return {
-    months,
-    interest: totalInterest
+
+    months:
+      months,
+
+    interest:
+      totalInterest
+
   };
 
 }
@@ -236,10 +427,14 @@ function simulateSingleExtra(
 ) {
 
   const interestThisMonth =
-    startingBalance * MONTHLY_RATE;
+    startingBalance *
+    MONTHLY_RATE;
+
 
   const principalThisMonth =
-    selectedAmount - interestThisMonth;
+    selectedAmount -
+    interestThisMonth;
+
 
   const resultingBalance =
     Math.max(
@@ -248,21 +443,29 @@ function simulateSingleExtra(
       principalThisMonth
     );
 
+
   const future =
     simulateLoan(
       resultingBalance,
       NORMAL_PAYMENT
     );
 
+
   return {
+
     interestThisMonth,
+
     principalThisMonth,
+
     resultingBalance,
+
     months:
       future.months + 1,
+
     totalInterest:
       interestThisMonth +
       future.interest
+
   };
 
 }
@@ -278,10 +481,14 @@ function simulateMonthlyAttack(
 ) {
 
   const interestThisMonth =
-    startingBalance * MONTHLY_RATE;
+    startingBalance *
+    MONTHLY_RATE;
+
 
   const principalThisMonth =
-    selectedAmount - interestThisMonth;
+    selectedAmount -
+    interestThisMonth;
+
 
   const resultingBalance =
     Math.max(
@@ -290,27 +497,35 @@ function simulateMonthlyAttack(
       principalThisMonth
     );
 
+
   const fullSimulation =
     simulateLoan(
       startingBalance,
       selectedAmount
     );
 
+
   return {
+
     interestThisMonth,
+
     principalThisMonth,
+
     resultingBalance,
+
     months:
       fullSimulation.months,
+
     totalInterest:
       fullSimulation.interest
+
   };
 
 }
 
 
 /* =========================================
-   ENCONTRAR PAGO PARA ELIMINAR MESES
+   ELIMINAR MESES
 ========================================= */
 
 function findPaymentForTargetMonths(
@@ -324,6 +539,7 @@ function findPaymentForTargetMonths(
       NORMAL_PAYMENT
     );
 
+
   const targetMonths =
     Math.max(
       1,
@@ -331,14 +547,19 @@ function findPaymentForTargetMonths(
       desiredMonths
     );
 
+
   let low =
     NORMAL_PAYMENT;
 
+
   let high =
-    NORMAL_PAYMENT * 10;
+    NORMAL_PAYMENT *
+    10;
+
 
   let result =
     high;
+
 
   for (
     let i = 0;
@@ -347,7 +568,10 @@ function findPaymentForTargetMonths(
   ) {
 
     const middle =
-      (low + high) / 2;
+      (
+        low + high
+      ) / 2;
+
 
     const simulation =
       simulateLoan(
@@ -355,21 +579,27 @@ function findPaymentForTargetMonths(
         middle
       );
 
+
     if (
       simulation.months <=
       targetMonths
     ) {
 
-      result = middle;
-      high = middle;
+      result =
+        middle;
+
+      high =
+        middle;
 
     } else {
 
-      low = middle;
+      low =
+        middle;
 
     }
 
   }
+
 
   return result;
 
@@ -377,15 +607,22 @@ function findPaymentForTargetMonths(
 
 
 /* =========================================
-   SALDO ESTIMADO ACTUAL
+   SALDO ACTUAL
 ========================================= */
 
 function getEstimatedCurrentBalance() {
 
   const made =
-    Number(
-      paymentsMade.value
-    ) || 0;
+    Math.max(
+      0,
+      Math.min(
+        TOTAL_PAYMENTS,
+        Number(
+          paymentsMade.value
+        ) || 0
+      )
+    );
+
 
   return calculateBalanceAfterPayments(
     ORIGINAL_PRINCIPAL,
@@ -398,7 +635,56 @@ function getEstimatedCurrentBalance() {
 
 
 /* =========================================
-   ACTUALIZAR PREVIEW
+   PROGRESO VISUAL
+========================================= */
+
+function updateProgress() {
+
+  const made =
+    Math.max(
+      0,
+      Math.min(
+        TOTAL_PAYMENTS,
+        Number(
+          paymentsMade.value
+        ) || 0
+      )
+    );
+
+
+  const remaining =
+    Math.max(
+      0,
+      TOTAL_PAYMENTS -
+      made
+    );
+
+
+  const percentage =
+    TOTAL_PAYMENTS > 0
+      ? (
+          made /
+          TOTAL_PAYMENTS
+        ) * 100
+      : 0;
+
+
+  progressFill.style.width =
+    `${percentage}%`;
+
+
+  paymentsMadeDisplay.textContent =
+    made;
+
+
+  paymentsRemainingDisplay.textContent =
+    remaining;
+
+}
+
+
+/* =========================================
+   PREVIEW
 ========================================= */
 
 function updatePreview() {
@@ -408,6 +694,7 @@ function updatePreview() {
       paymentAmount.value
     ) || 0;
 
+
   const extra =
     Math.max(
       0,
@@ -415,31 +702,52 @@ function updatePreview() {
       NORMAL_PAYMENT
     );
 
+
   const balance =
     getEstimatedCurrentBalance();
 
 
   currentBalance.textContent =
-    currency(balance);
+    currency(
+      balance
+    );
+
 
   selectedPayment.textContent =
-    currency(payment);
+    currency(
+      payment
+    );
+
 
   extraPayment.textContent =
-    currency(extra);
+    currency(
+      extra
+    );
 
 
   receiptCurrentBalance.textContent =
-    currency(balance);
+    currency(
+      balance
+    );
+
 
   receiptSelectedPayment.textContent =
-    currency(payment);
+    currency(
+      payment
+    );
+
 
   receiptExtra.textContent =
-    currency(extra);
+    currency(
+      extra
+    );
+
 
   receiptPaymentNumber.textContent =
     `${paymentsMade.value} / ${TOTAL_PAYMENTS}`;
+
+
+  updateProgress();
 
 }
 
@@ -455,16 +763,33 @@ function runSimulation() {
       paymentAmount.value
     );
 
+
   const balance =
     getEstimatedCurrentBalance();
 
-  const mode =
+
+  const selectedMode =
     document.querySelector(
       'input[name="mode"]:checked'
-    ).value;
+    );
 
 
-  /* ESCENARIO NORMAL */
+  if (
+    !selectedMode
+  ) {
+
+    alert(
+      "Selecciona un modo de simulación."
+    );
+
+    return;
+
+  }
+
+
+  const mode =
+    selectedMode.value;
+
 
   const normalScenario =
     simulateLoan(
@@ -473,25 +798,46 @@ function runSimulation() {
     );
 
 
-  /* MODO ELIMINAR MESES */
+  /* =========================
+     ELIMINAR MESES
+  ========================== */
 
-  if (mode === "target") {
+  if (
+    mode === "target"
+  ) {
+
+    const answer =
+      prompt(
+        "¿Cuántos meses quieres eliminar?"
+      );
+
+
+    if (
+      answer === null
+    ) {
+
+      return;
+
+    }
+
 
     const desiredMonths =
-      Number(
-        prompt(
-          "¿Cuántos meses quieres eliminar?"
-        )
-      );
+      Number(answer);
+
 
     if (
       !desiredMonths ||
       desiredMonths <= 0
     ) {
 
+      alert(
+        "Introduce un número válido de meses."
+      );
+
       return;
 
     }
+
 
     payment =
       findPaymentForTargetMonths(
@@ -499,15 +845,19 @@ function runSimulation() {
         desiredMonths
       );
 
+
     paymentAmount.value =
       payment.toFixed(2);
 
   }
 
 
-  /* VALIDACIÓN */
+  /* =========================
+     VALIDACIÓN
+  ========================== */
 
   if (
+    !payment ||
     payment <
     NORMAL_PAYMENT
   ) {
@@ -524,9 +874,13 @@ function runSimulation() {
   let scenario;
 
 
-  /* BOMBITA */
+  /* =========================
+     BOMBITA
+  ========================== */
 
-  if (mode === "single") {
+  if (
+    mode === "single"
+  ) {
 
     scenario =
       simulateSingleExtra(
@@ -534,12 +888,7 @@ function runSimulation() {
         payment
       );
 
-  }
-
-
-  /* ATAQUE MENSUAL / OBJETIVO */
-
-  else {
+  } else {
 
     scenario =
       simulateMonthlyAttack(
@@ -550,11 +899,10 @@ function runSimulation() {
   }
 
 
-  /* CÁLCULOS FINALES */
-
   const extra =
     payment -
     NORMAL_PAYMENT;
+
 
   const savedMonths =
     Math.max(
@@ -562,6 +910,7 @@ function runSimulation() {
       normalScenario.months -
       scenario.months
     );
+
 
   const savedInterest =
     Math.max(
@@ -571,41 +920,55 @@ function runSimulation() {
     );
 
 
-  /* =========================================
-     RESULTADOS EN PANTALLA
-  ========================================= */
+  /* =========================
+     PANTALLA
+  ========================== */
 
   currentBalance.textContent =
-    currency(balance);
+    currency(
+      balance
+    );
+
 
   selectedPayment.textContent =
-    currency(payment);
+    currency(
+      payment
+    );
+
 
   extraPayment.textContent =
-    currency(extra);
+    currency(
+      extra
+    );
+
 
   principalPaid.textContent =
     currency(
       scenario.principalThisMonth
     );
 
+
   interestPaid.textContent =
     currency(
       scenario.interestThisMonth
     );
+
 
   newBalance.textContent =
     currency(
       scenario.resultingBalance
     );
 
+
   interestSaved.textContent =
     currency(
       savedInterest
     );
 
+
   remainingPayments.textContent =
     scenario.months;
+
 
   monthsSaved.textContent =
     savedMonths === 1
@@ -613,54 +976,60 @@ function runSimulation() {
       : `${savedMonths} meses`;
 
 
-  /* =========================================
-     RESULTADOS EN EL RECIBO
-  ========================================= */
+  /* =========================
+     RECIBO
+  ========================== */
 
   receiptCurrentBalance.textContent =
-    currency(balance);
+    currency(
+      balance
+    );
+
 
   receiptSelectedPayment.textContent =
-    currency(payment);
+    currency(
+      payment
+    );
+
 
   receiptExtra.textContent =
-    currency(extra);
+    currency(
+      extra
+    );
+
 
   receiptPrincipal.textContent =
     currency(
       scenario.principalThisMonth
     );
 
+
   receiptInterest.textContent =
     currency(
       scenario.interestThisMonth
     );
+
 
   receiptNewBalance.textContent =
     currency(
       scenario.resultingBalance
     );
 
+
   receiptMonthsSaved.textContent =
     savedMonths === 1
       ? "1 MES"
       : `${savedMonths} MESES`;
+
 
   receiptInterestSaved.textContent =
     currency(
       savedInterest
     );
 
+
   receiptRemainingPayments.textContent =
     scenario.months;
-
-
-  document
-    .querySelector(
-      ".result-note"
-    )
-    .textContent =
-      "Estimación de Kairos Bank basada en amortización mensual.";
 
 
   updatePreview();
@@ -673,30 +1042,36 @@ function runSimulation() {
 ========================================= */
 
 document
-  .querySelectorAll("[data-extra]")
-  .forEach(button => {
+  .querySelectorAll(
+    "[data-extra]"
+  )
+  .forEach(
+    button => {
 
-    button.addEventListener(
-      "click",
-      () => {
+      button.addEventListener(
+        "click",
+        () => {
 
-        const extra =
-          Number(
-            button.dataset.extra
-          );
+          const extra =
+            Number(
+              button.dataset.extra
+            );
 
-        paymentAmount.value =
-          (
-            NORMAL_PAYMENT +
-            extra
-          ).toFixed(2);
 
-        updatePreview();
+          paymentAmount.value =
+            (
+              NORMAL_PAYMENT +
+              extra
+            ).toFixed(2);
 
-      }
-    );
 
-  });
+          updatePreview();
+
+        }
+      );
+
+    }
+  );
 
 
 /* =========================================
@@ -707,6 +1082,7 @@ paymentAmount.addEventListener(
   "input",
   updatePreview
 );
+
 
 paymentsMade.addEventListener(
   "input",
@@ -720,12 +1096,14 @@ simulateButton.addEventListener(
 
     runSimulation();
 
+
     document
       .getElementById(
         "results"
       )
       .scrollIntoView({
-        behavior: "smooth"
+        behavior:
+          "smooth"
       });
 
   }
@@ -749,23 +1127,30 @@ resetButton.addEventListener(
     paymentAmount.value =
       NORMAL_PAYMENT.toFixed(2);
 
+
     paymentsMade.value =
       29;
+
 
     principalPaid.textContent =
       "—";
 
+
     interestPaid.textContent =
       "—";
+
 
     newBalance.textContent =
       "—";
 
+
     interestSaved.textContent =
       "—";
 
+
     remainingPayments.textContent =
       "—";
+
 
     monthsSaved.textContent =
       "—";
@@ -774,17 +1159,22 @@ resetButton.addEventListener(
     receiptPrincipal.textContent =
       "—";
 
+
     receiptInterest.textContent =
       "—";
+
 
     receiptNewBalance.textContent =
       "—";
 
+
     receiptMonthsSaved.textContent =
       "—";
 
+
     receiptInterestSaved.textContent =
       "—";
+
 
     receiptRemainingPayments.textContent =
       "—";
@@ -799,5 +1189,9 @@ resetButton.addEventListener(
 /* =========================================
    INICIO
 ========================================= */
+
+setTheme(
+  "dark"
+);
 
 updatePreview();
