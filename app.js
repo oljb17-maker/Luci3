@@ -15,14 +15,12 @@ const NORMAL_PAYMENT = 1189.78;
 const TOTAL_PAYMENTS = 72;
 
 /*
-  Este capital original está CALIBRADO
-  provisionalmente para que:
+  Capital original calibrado provisionalmente
+  para que el saldo estimado alrededor del
+  pago 29 coincida con el saldo conocido.
 
-  pago 29 -> saldo aproximado $37,924.48
-
-  Cuando tengamos el "Amount Financed"
-  real del contrato, reemplazaremos
-  este valor.
+  Cuando tengamos el Amount Financed real,
+  este valor se reemplaza.
 */
 
 const ORIGINAL_PRINCIPAL = 57321.54;
@@ -74,6 +72,14 @@ const printButton =
 const resetButton =
   document.getElementById("resetButton");
 
+
+/* =========================================
+   ELEMENTOS DEL RECIBO
+========================================= */
+
+const receiptCurrentBalance =
+  document.getElementById("receiptCurrentBalance");
+
 const receiptSelectedPayment =
   document.getElementById("receiptSelectedPayment");
 
@@ -83,9 +89,27 @@ const receiptExtra =
 const receiptPaymentNumber =
   document.getElementById("receiptPaymentNumber");
 
+const receiptPrincipal =
+  document.getElementById("receiptPrincipal");
+
+const receiptInterest =
+  document.getElementById("receiptInterest");
+
+const receiptNewBalance =
+  document.getElementById("receiptNewBalance");
+
+const receiptMonthsSaved =
+  document.getElementById("receiptMonthsSaved");
+
+const receiptInterestSaved =
+  document.getElementById("receiptInterestSaved");
+
+const receiptRemainingPayments =
+  document.getElementById("receiptRemainingPayments");
+
 
 /* =========================================
-   FORMATO
+   FORMATO MONEDA
 ========================================= */
 
 function currency(value) {
@@ -102,7 +126,7 @@ function currency(value) {
 
 
 /* =========================================
-   CALCULAR SALDO DESPUÉS DE N PAGOS
+   SALDO DESPUÉS DE N PAGOS
 ========================================= */
 
 function calculateBalanceAfterPayments(
@@ -404,6 +428,10 @@ function updatePreview() {
   extraPayment.textContent =
     currency(extra);
 
+
+  receiptCurrentBalance.textContent =
+    currency(balance);
+
   receiptSelectedPayment.textContent =
     currency(payment);
 
@@ -543,7 +571,9 @@ function runSimulation() {
     );
 
 
-  /* MOSTRAR */
+  /* =========================================
+     RESULTADOS EN PANTALLA
+  ========================================= */
 
   currentBalance.textContent =
     currency(balance);
@@ -581,6 +611,48 @@ function runSimulation() {
     savedMonths === 1
       ? "1 mes"
       : `${savedMonths} meses`;
+
+
+  /* =========================================
+     RESULTADOS EN EL RECIBO
+  ========================================= */
+
+  receiptCurrentBalance.textContent =
+    currency(balance);
+
+  receiptSelectedPayment.textContent =
+    currency(payment);
+
+  receiptExtra.textContent =
+    currency(extra);
+
+  receiptPrincipal.textContent =
+    currency(
+      scenario.principalThisMonth
+    );
+
+  receiptInterest.textContent =
+    currency(
+      scenario.interestThisMonth
+    );
+
+  receiptNewBalance.textContent =
+    currency(
+      scenario.resultingBalance
+    );
+
+  receiptMonthsSaved.textContent =
+    savedMonths === 1
+      ? "1 MES"
+      : `${savedMonths} MESES`;
+
+  receiptInterestSaved.textContent =
+    currency(
+      savedInterest
+    );
+
+  receiptRemainingPayments.textContent =
+    scenario.months;
 
 
   document
@@ -697,6 +769,26 @@ resetButton.addEventListener(
 
     monthsSaved.textContent =
       "—";
+
+
+    receiptPrincipal.textContent =
+      "—";
+
+    receiptInterest.textContent =
+      "—";
+
+    receiptNewBalance.textContent =
+      "—";
+
+    receiptMonthsSaved.textContent =
+      "—";
+
+    receiptInterestSaved.textContent =
+      "—";
+
+    receiptRemainingPayments.textContent =
+      "—";
+
 
     updatePreview();
 
